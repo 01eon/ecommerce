@@ -5,9 +5,7 @@ import Authentication from "./routes/authentication/authentication.component";
 
 import "./App.css";
 
-const Shop = () => {
-  return <h1>Shop here hahahahahahahahah</h1>;
-};
+import Shop from "./routes/shop/shop.component";
 
 const App = () => {
   return (
