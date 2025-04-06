@@ -1,32 +1,48 @@
-import "./checkout-item.styles.scss";
+import {
+  CheckoutItemContainer,
+  CheckoutImageContainer,
+  CheckoutImg,
+  CheckoutName,
+  CheckoutQuantity,
+  QuantityArr,
+  QuantityVal,
+  CheckoutPrice,
+  CheckoutRemoveButton,
+} from "./checkout-item.styles";
 
 import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
 
-const CheckoutItem = ({cartItem}) => {
-    const { clearItemFromCart, addItemToCart, removeItemToCart } = useContext(CartContext)
-    const {name, imageUrl, price, quantity} = cartItem;
+const CheckoutItem = ({ cartItem }) => {
+  const { clearItemFromCart, addItemToCart, removeItemToCart } =
+    useContext(CartContext);
+  const { name, imageUrl, price, quantity } = cartItem;
 
-    const addItemHandler = () => addItemToCart(cartItem);
-    const removeItemHandler = () => removeItemToCart(cartItem);
-    const clearItemHandler = () => clearItemFromCart(cartItem);
+  const addItemHandler = () => addItemToCart(cartItem);
+  const removeItemHandler = () => removeItemToCart(cartItem);
+  const clearItemHandler = () => clearItemFromCart(cartItem);
 
-    return (
-        <div className="checkout-item-container">
-            <div className="image-container">
-                <img src={imageUrl} alt={name} />
-            </div>
-            <span className="name">{name}</span>
-            <span className="quantity">
-                <span className="arrow" onClick={removeItemHandler}>&#10094;</span>
-                <span className="value"> {quantity} </span>
-                <span className="arrow" onClick={addItemHandler}>&#10095;</span>
-
-            </span>
-            <span className="price">${price.toFixed(2)}</span>
-            <div className="remove-button" onClick={clearItemHandler}> &#10005; </div>
-        </div>
-    )
-}
+  return (
+    <CheckoutItemContainer>
+      <CheckoutImageContainer>
+        <CheckoutImg src={imageUrl} alt={name} />
+      </CheckoutImageContainer>
+      <CheckoutName>{name}</CheckoutName>
+      <CheckoutQuantity>
+        <QuantityArr onClick={removeItemHandler}>
+          &#10094;
+        </QuantityArr>
+        <QuantityVal> {quantity} </QuantityVal>
+        <QuantityArr onClick={addItemHandler}>
+          &#10095;
+        </QuantityArr>
+      </CheckoutQuantity>
+      <CheckoutPrice>${price.toFixed(2)}</CheckoutPrice>
+      <CheckoutRemoveButton onClick={clearItemHandler}>
+        &#10005;
+      </CheckoutRemoveButton>
+    </CheckoutItemContainer>
+  );
+};
 
 export default CheckoutItem;
