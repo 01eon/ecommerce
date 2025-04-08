@@ -23,7 +23,6 @@ const CartDropdown = () => {
                 {cartItems.map(item => <CartItem key={item.id} cartItem={item} />)}
             </CartItems>
             <CartButton as={Button} onClick={goToCheckoutHandler}> Go to Checkout </CartButton>
-
         </CartDropdownContainer>
     )
 }
