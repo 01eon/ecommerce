@@ -1,22 +1,16 @@
-import {
-  DirectoryItemContainer,
-  DirectoryItemBg,
-  DirectoryContent,
-  DirectoryHeading,
-  DirectoryParagraph,
-} from "./directory-item.styles";
+import { DirectoryItemContainer, DirectoryImage, DirectoryContent } from  "./directory-item.styles";
 
 const DirectoryItem = ({ category }) => {
   const { imageUrl, title } = category;
 
   return (
     <DirectoryItemContainer>
-      <DirectoryItemBg
+      <DirectoryImage
         style={{ backgroundImage: `url(${imageUrl})` }}
       />
       <DirectoryContent>
-        <DirectoryHeading>{title}</DirectoryHeading>
-        <DirectoryParagraph>Shop Now</DirectoryParagraph>
+        <h2>{title}</h2>
+        <p>Shop Now</p>
       </DirectoryContent>
     </DirectoryItemContainer>
   );
