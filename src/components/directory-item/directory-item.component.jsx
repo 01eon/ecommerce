@@ -2,11 +2,10 @@ import { DirectoryItemContainer, DirectoryImage, DirectoryContent } from  "./dir
 
 const DirectoryItem = ({ category }) => {
   const { imageUrl, title } = category;
-
+ 
   return (
     <DirectoryItemContainer>
-      <DirectoryImage
-        style={{ backgroundImage: `url(${imageUrl})` }}
+      <DirectoryImage imageUrl={imageUrl}
       />
       <DirectoryContent>
         <h2>{title}</h2>
