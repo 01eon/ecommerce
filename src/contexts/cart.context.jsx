@@ -1,4 +1,6 @@
-import { createContext, useState, useEffect, useReducer } from "react";
+import { createContext, useReducer } from "react";
+
+import { createAction } from "../utils/reducer/reducer.utils";
 
 const addCartItem = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(
@@ -49,7 +51,6 @@ export const CartContext = createContext({
   cartTotal: 0,
 });
 
-
 // [Reducer] Initial State
 const INITIAL_STATE = {
   cartItems: [],
@@ -73,26 +74,23 @@ const cartReducer = (state, action) => {
     case SET_CART_ITEMS:
       return {
         ...state,
-        ...payload
+        ...payload,
       };
-      case SET_IS_CART_OPEN:
-        return {
-          ...state,
-          isCartOpen: payload
-        }
+    case SET_IS_CART_OPEN:
+      return {
+        ...state,
+        isCartOpen: payload,
+      };
     default:
       throw new Error(`Unhandled type ${type} in userReducer`);
   }
 };
 
 export const CartProvider = ({ children }) => {
-
   const { SET_CART_ITEMS, SET_IS_CART_OPEN } = CART_ACTION_TYPES;
 
-
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
-  const {cartItems, cartCount, cartTotal, isCartOpen} = state;
-
+  const { cartItems, cartCount, cartTotal, isCartOpen } = state;
 
   // [Reducer] Update Cart Items
   const updateCartItemsReducer = (newCartItems) => {
@@ -105,14 +103,13 @@ export const CartProvider = ({ children }) => {
       0
     );
 
-    dispatch({
-      type: SET_CART_ITEMS,
-      payload: {
+    dispatch(
+      createAction(SET_CART_ITEMS, {
         cartItems: newCartItems,
         cartTotal: newCartTotal,
         cartCount: newCartCount,
-      },
-    });
+      })
+    );
   };
 
   // [Reducer] Action Creator Functions
@@ -132,9 +129,8 @@ export const CartProvider = ({ children }) => {
   };
 
   const setIsCartOpen = () => {
-    dispatch({ type: SET_IS_CART_OPEN, payload: !isCartOpen });
-
-  }
+    dispatch(createAction(SET_IS_CART_OPEN, !isCartOpen));
+  };
 
   const value = {
     isCartOpen,
