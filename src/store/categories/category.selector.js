@@ -1,0 +1,1 @@
+export const previewCategoryMap = (state) => state.category.categoriesMap
