@@ -5,11 +5,14 @@ import { CategoriesContext } from "../../contexts/categories.context";
 
 import CategoryPreview from "../../components/category-preview/category-preview.component"
 
-import { previewCategoryMap } from "../../store/categories/category.selector";
+import { selectCategoriesMap } from "../../store/categories/category.selector";
 
 const CategoriesPreview = () => {
   // const { categoriesMap } = useContext(CategoriesContext);
-  const categoriesMap = useSelector(previewCategoryMap)
+  const categoriesMap = useSelector(selectCategoriesMap)
+  if (!categoriesMap || Object.keys(categoriesMap).length === 0) {
+    return <span>Loading...</span>; // or null
+  }
   return (
     <Fragment>
       {Object.keys(categoriesMap).map((title) => {

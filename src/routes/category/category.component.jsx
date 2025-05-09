@@ -1,19 +1,26 @@
 import { useContext, useState, useEffect, Fragment } from "react";
 import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 
-import { CategoriesContext } from "../../contexts/categories.context";
+import { selectCategoriesMap } from "../../store/categories/category.selector";
+
 import ProductCard from "../../components/product-card/product-card.component";
 
 import { CategoryContainer, CategoryTitle } from "./category.styles";
  
 const Category = () => {
   const { category } = useParams();
-  const { categoriesMap } = useContext(CategoriesContext);
+  console.log('render/re-rendering category component');
+
+  const categoriesMap = useSelector(selectCategoriesMap);
+
   const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
+    console.log('effect fired calling setProducts')
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
+
   return (
     <Fragment>
       <CategoryTitle>{category.toLocaleUpperCase()}</CategoryTitle>
