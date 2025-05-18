@@ -1,12 +1,11 @@
 import { createSelector } from "reselect";
 
-const selectCategorySelector = (state) => {
+const selectCategoryReducer = (state) => {
   return state.categories;
 };
 
-// memoized selector
 export const selectCategories = createSelector(
-  [selectCategorySelector],
+  [selectCategoryReducer],
   (categoriesSlice) => {
     return categoriesSlice.categories;
   }
@@ -22,3 +21,8 @@ export const selectCategoriesMap = createSelector(
     }, {});
   }
 );
+
+export const selectCategoriesIsLoading = createSelector(
+  [selectCategoryReducer],
+  (categoriesSlice) => categoriesSlice.isLoading
+)
