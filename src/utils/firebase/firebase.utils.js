@@ -110,7 +110,7 @@ export const createUserDocumentFromAuth = async (
     }
   }
 
-  return userDocRef;
+  return await getDoc(userDocRef);
 };
 
 // Sign Up
